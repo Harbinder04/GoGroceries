@@ -2,8 +2,9 @@ name: Build Succeeds on PR
 
 on:
   pull_request:
+    # Allow pull requests from any branch
     branches:
-      - master
+      - '*'
 
 jobs:
   build:
