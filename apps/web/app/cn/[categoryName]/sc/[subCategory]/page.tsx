@@ -5,7 +5,7 @@ import { ProductListing } from '@components/Porduct/product-listing';
 import { useCategoryStore } from '@store/categoryStrore';
 import { SubCategory } from '@/types/type';
 
-function page() {
+const Page = () => {
 	const subCategories = useCategoryStore(
 		(state) => state.subCategories as SubCategory[]
 	);
@@ -18,6 +18,6 @@ function page() {
 			<ProductListing title='Buy Milk Online' products={allProducts} />
 		</main>
 	);
-}
+};
 
-export default page;
+export default Page;

@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { X } from '@repo/ui/lucide-react';
 import CartItemCard from './CartItemCard';
 // import BillDetails from './BillDetails';
@@ -85,6 +85,8 @@ function CartButton({ onClose }: { onClose: () => void }) {
 				<div className='flex justify-between items-center mb-4'>
 					<span className='font-medium'>Subtotal:</span>
 					<span className='font-semibold'>₹{totalPrice.toFixed(2)}</span>
+					<span className='font-medium'>Total Items:</span>
+					<span className='font-semibold'>₹{totalItems}</span>
 				</div>
 				<div className='flex-col justify-center items-center w-full'>
 					<button

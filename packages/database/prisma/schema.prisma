@@ -58,7 +58,7 @@ model Category {
   id          Int           @id @default(autoincrement())
   name        String        @unique
   image       String?
-  subcategory SubCategory[] //one-to-many relationship with products 
+  subcategory SubCategory[] //one-to-munknown relationship with products 
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
 }

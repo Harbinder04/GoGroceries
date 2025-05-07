@@ -1,7 +1,16 @@
 import React from 'react';
-import { ChevronDown, ChevronUp, Truck, Shield, Info } from 'lucide-react';
+import { ChevronDown, ChevronUp, Info } from 'lucide-react';
 
-const BillDetails = ({
+interface BillDetailsProps {
+	subtotal?: number;
+	deliveryCharge?: number;
+	handlingCharge?: number;
+	currency?: string;
+	showDetails?: boolean;
+	onToggleDetails?: () => void;
+}
+
+const BillDetails: React.FC<BillDetailsProps> = ({
 	subtotal = 104,
 	deliveryCharge = 30,
 	handlingCharge = 3,

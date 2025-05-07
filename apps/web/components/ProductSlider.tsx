@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRef } from 'react';
 import { ChevronLeft, ChevronRight } from '@repo/ui/lucide-react';
-import ItemCard from './ItemCard';
+// import ItemCard from './ItemCard';
 
 const ProductSlider = () => {
 	const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -17,45 +17,6 @@ const ProductSlider = () => {
 			} as ScrollToOptions);
 		}
 	};
-
-	const products = [
-		{
-			title: 'Dollar Pre-rolled Rolling Paper by Bongchie',
-			price: '60',
-			quantity: '3 packs',
-			deliveryTime: '9 MINS',
-		},
-		{
-			title: 'Perfect Rolled Cones (Natural) - Bongchie',
-			price: '45',
-			quantity: '3 pack',
-			deliveryTime: '9 MINS',
-		},
-		{
-			title: 'Ultimate Rolling Paper with Filter Tips',
-			price: '90',
-			quantity: '1 pack (32 pieces)',
-			deliveryTime: '9 MINS',
-		},
-		{
-			title: 'Brown Rolling Paper Cones - Stash Pro',
-			price: '90',
-			quantity: '6 pieces',
-			deliveryTime: '9 MINS',
-		},
-		{
-			title: 'Brown Rolling Paper (Small) - Stash Pro',
-			price: '45',
-			quantity: '1 pack (40 pieces)',
-			deliveryTime: '9 MINS',
-		},
-		{
-			title: 'Brown Ripper Rolling Paper 32 Leaves',
-			price: '120',
-			quantity: '1 pack (64 pieces)',
-			deliveryTime: '9 MINS',
-		},
-	];
 
 	return (
 		<div className='relative max-w-7xl mx-auto'>
@@ -73,9 +34,9 @@ const ProductSlider = () => {
 						scrollbarWidth: 'none',
 						msOverflowStyle: 'none',
 					}}>
-					{products.map((product, index) => (
-						<ItemCard key={index} {...product} />
-					))}
+					{/* {products.map((product, index) => (
+						<ItemCard key={index} product={product} />
+					))} */}
 				</div>
 
 				<button

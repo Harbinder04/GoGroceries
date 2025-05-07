@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useCategoryStore } from '@store/categoryStrore';
+import Image from 'next/image';
 
 interface CategoryModal {
 	id: number;
@@ -18,7 +19,7 @@ const GroceryCategories = () => {
 	const [loading, setLoading] = useState<boolean>(false);
 
 	const router = useRouter();
-
+	console.log(subCategories);
 	// Pass categoryId as parameter to the function
 	async function handleCategoryClick(categoryId: number, categoryName: string) {
 		try {
@@ -33,8 +34,13 @@ const GroceryCategories = () => {
 			} else {
 				setError('No subcategories found');
 			}
-		} catch (e: any) {
-			setError(e.message || 'Failed to fetch subcategories');
+		} catch (e: unknown) {
+			// Changed from Error to unknown
+			if (e instanceof Error) {
+				setError(e.message || 'Failed to fetch subcategories');
+			} else {
+				setError('Failed to fetch subcategories');
+			}
 			console.error(e);
 		} finally {
 			setLoading(false);
@@ -48,9 +54,14 @@ const GroceryCategories = () => {
 					'http://localhost:3000/api/categories'
 				);
 				if (response) setCategories(response.data.data);
-			} catch (e: any) {
-				console.error(e);
-				setError(e.message || 'Failed to fetch categories');
+			} catch (e: unknown) {
+				// Changed from Error to unknown
+				if (e instanceof Error) {
+					console.error(e);
+					setError(e.message || 'Failed to fetch categories');
+				} else {
+					setError('Failed to fetch categories');
+				}
 			}
 		};
 
@@ -90,7 +101,7 @@ const GroceryCategories = () => {
 							onClick={() => handleCategoryClick(category.id, category.name)}
 							className='flex flex-col items-center h-full w-auto cursor-pointer hover:opacity-80 transition-opacity'>
 							<div className='bg-gray-100 rounded-lg w-[128px] h-[188px]'>
-								<img
+								<Image
 									src={category.image}
 									alt={category.name}
 									className='w-fit h-fit object-contain mx-auto'

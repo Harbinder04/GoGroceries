@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { Product } from '@/types/type';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const ProductDisplay = () => {
 	const { fetchProducts } = useProductStore();
@@ -34,7 +35,7 @@ const ProductDisplay = () => {
 		};
 
 		loadProduct();
-	}, [params.productId, fetchProducts, quantity]);
+	}, [params.productId, fetchProducts, quantity, getItemQuantity, params]);
 
 	if (loading) {
 		return (
@@ -49,7 +50,7 @@ const ProductDisplay = () => {
 			{/* Left side - Product images */}
 			<div className='w-full lg:w-1/2'>
 				<div className='mb-4'>
-					<img
+					<Image
 						src={
 							`${product?.image[0]?.imageLink}` ||
 							`https://placehold.co/600x400`
@@ -66,7 +67,7 @@ const ProductDisplay = () => {
 							<div
 								key={img.id}
 								className='border border-gray-200 p-1 w-16 h-16 flex-shrink-0'>
-								<img
+								<Image
 									src={img.imageLink}
 									alt={`Thumbnail ${img.alt}`}
 									className='w-full h-full object-contain'
@@ -170,7 +171,7 @@ const ProductDisplay = () => {
 					{/* Superfast delivery */}
 					<div className='flex gap-4 mb-4'>
 						<div className='w-12 h-12'>
-							<img
+							<Image
 								src='https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=90/assets/web/blinkit-promises/10_minute_delivery.png'
 								alt='Fast delivery'
 								className='w-full h-full object-contain'
@@ -188,7 +189,7 @@ const ProductDisplay = () => {
 					{/* Best prices */}
 					<div className='flex gap-4 mb-4'>
 						<div className='w-12 h-12'>
-							<img
+							<Image
 								src='https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=90/assets/web/blinkit-promises/Best_Prices_Offers.png'
 								alt='Best prices'
 								className='w-full h-full object-contain'
@@ -206,7 +207,7 @@ const ProductDisplay = () => {
 					{/* Wide assortment */}
 					<div className='flex gap-4'>
 						<div className='w-12 h-12'>
-							<img
+							<Image
 								src='https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=90/assets/web/blinkit-promises/Wide_Assortment.png'
 								alt='Wide assortment'
 								className='w-full h-full object-contain'

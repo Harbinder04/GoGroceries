@@ -2,7 +2,8 @@ import { Product } from '@/types/type';
 import React from 'react';
 import { useCartStore } from '@/store/cartStore';
 import { useRouter } from 'next/navigation';
-import { useProductStore } from '@/store/productStore';
+// import { useProductStore } from '@/store/productStore';
+import Image from 'next/image';
 
 const ItemCard = ({
 	product,
@@ -14,14 +15,16 @@ const ItemCard = ({
 	const router = useRouter();
 	const { addToCart, removeFromCart, getItemQuantity } = useCartStore();
 	const quantity = getItemQuantity(product.id);
-	const { fetchProducts } = useProductStore();
+	// const { fetchProducts } = useProductStore();
 
 	function handleCardClick(e: React.MouseEvent<HTMLDivElement>) {
+		e.preventDefault();
 		try {
 			router.push(
 				`/prn/${product.prodName.replace(/\s+/g, '-')}/pid/${product.id}`
 			);
 		} catch (e: unknown) {
+			console.error(e);
 			console.log('unable to redirect');
 		}
 	}
@@ -30,7 +33,7 @@ const ItemCard = ({
 		<div
 			className='min-w-[200px] p-4 bg-white rounded-lg border border-gray-200 flex flex-col gap-2 cursor-pointer'
 			onClick={handleCardClick}>
-			<img
+			<Image
 				src={product.image[0]?.imageLink || 'https://placehold.co/600x400/png'}
 				alt={product.image[0]?.alt || product.prodName}
 				className='w-full h-40 object-contain mb-2'

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { toast } from '@repo/ui/sooner';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const CheckoutPage = () => {
 	const { items, totalPrice, clearCart } = useCartStore();
@@ -27,7 +28,7 @@ const CheckoutPage = () => {
 		// }
 	}, [items, router, orderPlaced]);
 	// Handle payment method selection
-	const handlePaymentSelect = (method: any) => {
+	const handlePaymentSelect = (method: 'gpay' | 'cod') => {
 		setPaymentMethod(method);
 	};
 
@@ -117,7 +118,7 @@ const CheckoutPage = () => {
 						Order Placed Successfully!
 					</h2>
 					<p className='text-gray-600 mb-6'>
-						Thank you for your order. We'll deliver it to you shortly.
+						Thank you for your order. We will deliver it to you shortly.
 					</p>
 					<Link href='/'>
 						<button className='bg-green-600 text-white py-2 px-6 rounded-md hover:bg-green-700 transition-colors w-full'>
@@ -190,13 +191,20 @@ const CheckoutPage = () => {
 									<div className='flex items-center'>
 										<div className='w-16 h-16 mr-4'>
 											{item.image && item.image[0] && (
-												<img
+												<Image
 													src={
 														item.image[0].imageLink ||
 														'https://placehold.co/100x100'
 													}
 													alt={item.prodName}
+													width={100} // or your desired width
+													height={100} // or your desired height
 													className='w-full h-full object-contain'
+													unoptimized={
+														item.image[0].imageLink?.startsWith('http')
+															? false
+															: true
+													}
 												/>
 											)}
 										</div>
@@ -225,7 +233,7 @@ const CheckoutPage = () => {
 								className={`border rounded-md p-4 flex items-center cursor-pointer ${paymentMethod === 'gpay' ? 'border-green-500 bg-green-50' : ''}`}
 								onClick={() => handlePaymentSelect('gpay')}>
 								<div className='w-10 h-10 mr-4'>
-									<img
+									<Image
 										src='https://cdn.iconscout.com/icon/free/png-256/free-google-pay-2038779-1721670.png'
 										alt='Google Pay'
 										className='w-full h-full object-contain'

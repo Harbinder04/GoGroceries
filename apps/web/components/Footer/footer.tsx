@@ -1,5 +1,6 @@
 import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Circle } from 'lucide-react';
+import Image from 'next/image';
 
 const Footer = () => {
 	return (
@@ -186,7 +187,7 @@ const Footer = () => {
 					<a
 						href='#'
 						className='bg-gray-800 text-white px-4 py-2 rounded flex items-center'>
-						<img
+						<Image
 							src='https://placehold.co/50x50'
 							alt='Apple App Store'
 							className='mr-2'
@@ -196,7 +197,7 @@ const Footer = () => {
 					<a
 						href='#'
 						className='bg-gray-800 text-white px-4 py-2 rounded flex items-center'>
-						<img
+						<Image
 							src='https://placehold.co/50x50'
 							alt='Google Play Store'
 							className='mr-2'
@@ -232,10 +233,7 @@ const Footer = () => {
 
 			{/* Disclaimer */}
 			<div className='mt-8 text-gray-500 text-sm'>
-				"Blinkit" is owned & managed by "Blink Commerce Private Limited" and is
-				not related, linked or interconnected in whatsoever manner or nature, to
-				"GROFFR.COM" which is a real estate services business operated by
-				"Redstone Consultancy Services Private Limited".
+				GoGroceries is owned & managed by GoGroceries Commerce Private Limited
 			</div>
 		</footer>
 	);

@@ -42,10 +42,11 @@ export async function POST(req: NextRequest) {
 			data: subCategory,
 			status: 201,
 		});
-	} catch (e: any) {
+	} catch (e: unknown) {
 		return NextResponse.json(
 			{
-				error: 'An unexpected error occurred',
+				error: e,
+				message: 'Internal server error'
 			},
 			{ status: 500 }
 		);
@@ -96,10 +97,11 @@ export async function GET(req: NextRequest) {
 			subCategories,
 			status: 200,
 		});
-	} catch (e: any) {
+	} catch (e: unknown) {
 		return NextResponse.json(
 			{
-				error: 'An unexpected error occurred',
+				error: e,
+				message: 'Internal server error'
 			},
 			{ status: 500 }
 		);

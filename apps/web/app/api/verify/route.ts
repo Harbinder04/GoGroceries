@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
 
 		await createVerifyCookie(user.id, user.phoneNumber, 'VERIFYED');
 		return NextResponse.json({ message: 'User verified' }, { status: 200 });
-	} catch (e: any) {
+	} catch (e: unknown) {
 		console.error(e);
 		return NextResponse.json(
 			{ message: 'Verification unsuccessful. Try again!' },

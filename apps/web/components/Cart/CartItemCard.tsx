@@ -1,14 +1,25 @@
 'use client';
 import React, { useState } from 'react';
+import Image from 'next/image';
+
+interface Product {
+	id: string | number;
+	image: { imageLink: string }[];
+	prodName: string;
+	unit: string;
+	price: number;
+	mrp: number;
+	quantity: number;
+}
 
 function CartItemCard({
 	products,
 	removeFromCart,
 	updateQuantity,
 }: {
-	products: any;
-	removeFromCart: any;
-	updateQuantity: any;
+	products: Product;
+	removeFromCart: (id: string | number) => void;
+	updateQuantity: (id: string | number, quantity: number) => void;
 }) {
 	const textRef = React.useRef<HTMLSpanElement>(null);
 	const [lineWidth, setLineWidth] = useState(0);
@@ -22,7 +33,7 @@ function CartItemCard({
 	return (
 		<div className='grid grid-cols-12 gap-2 my-2 font-semibold h-auto'>
 			<div className='col-span-3 flex justify-center items-center'>
-				<img
+				<Image
 					src={
 						products.image[0]?.imageLink || 'https://placehold.co/600x400/png'
 					}

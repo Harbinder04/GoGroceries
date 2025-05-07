@@ -10,22 +10,22 @@ import Link from 'next/link';
 function Header() {
 	const [activeButton, setActiveButton] = React.useState('');
 	const [isModalOpen, setIsModalOpen] = React.useState(false);
-	const [location, setLocation] = React.useState<GeolocationPosition | null>(
-		null
-	);
+	// const [location, setLocation] = React.useState<GeolocationPosition | null>(
+	// 	null
+	// );
 	const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
 	const [showAccountDropdown, setShowAccountDropdown] = React.useState(false);
 
-	function getLocation() {
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition((position) =>
-				setLocation(position)
-			);
-		} else {
-			console.log('Geolocation is not supported by this browser.');
-		}
-	}
+	// function getLocation() {
+	// 	if (navigator.geolocation) {
+	// 		navigator.geolocation.getCurrentPosition((position) =>
+	// 			setLocation(position)
+	// 		);
+	// 	} else {
+	// 		console.log('Geolocation is not supported by this browser.');
+	// 	}
+	// }
 
 	const handleLoginClick = () => {
 		setIsModalOpen(true);

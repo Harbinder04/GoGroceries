@@ -15,7 +15,7 @@
 // 		const skip = (page - 1) * limit;
 
 // 		// Build the query based on parameters
-// 		const whereClause: any = {};
+// 		const whereClause: unknown = {};
 // 		if (subcategoryId) {
 // 			whereClause.subcategoryId = subcategoryId;
 // 		}

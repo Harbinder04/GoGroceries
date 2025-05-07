@@ -100,7 +100,7 @@ export async function checkSession() {
 		}
 
 		return { isAuthenticated: true, user: decode };
-	} catch (e: any) {
+	} catch (e: unknown) {
 		console.log(e);
 		return { isAuthenticated: false };
 	}

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@repo/db';
 import { CategorySchema } from '@repo/common/types';
 
-export async function GET(req: NextRequest) {
+export async function GET() {
 	try {
 		//get all the categories
 		const cy = await prisma.category.findMany({});
@@ -20,9 +20,9 @@ export async function GET(req: NextRequest) {
 			},
 			{ status: 200 }
 		);
-	} catch (e: any) {
+	} catch (e: unknown) {
 		return NextResponse.json(
-			{ message: 'Internal server error occured ' },
+			{ message: e },
 			{ status: 500 }
 		);
 	}
@@ -60,9 +60,9 @@ export async function POST(req: NextRequest) {
 			{ message: 'Successfully added in database' },
 			{ status: 200 }
 		);
-	} catch (e: any) {
+	} catch (e: unknown) {
 		NextResponse.json(
-			{ message: 'Internal server error occured ' },
+			{ message: e },
 			{ status: 500 }
 		);
 	}

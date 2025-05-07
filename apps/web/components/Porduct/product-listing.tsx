@@ -1,9 +1,11 @@
 'use client';
 import ItemCard from '@/components/ItemCard';
 import CoustomSortDropdown from '@repo/ui/CoustomSortDropdown';
+import { Product } from '@/types/type';
+
 interface ProductListingProps {
 	title: string;
-	products: any[];
+	products: Product[];
 }
 
 export function ProductListing({ title, products }: ProductListingProps) {

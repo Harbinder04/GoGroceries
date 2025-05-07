@@ -6,7 +6,7 @@ const DEFAULT_USERS = [
   {
     name: "Harbinder Singh",
     phoneNumber: "8219921569",
-    otp: 2323,
+    otp: "2323", // Convert otp to string
     isVerified: true,
   },
 ] as Array<Partial<User>>;
@@ -15,7 +15,7 @@ async function seedUsers() {
   try {
     await prisma.user.deleteMany({});
     await Promise.all(
-      DEFAULT_USERS.map(async (user) =>{
+      DEFAULT_USERS.map(async (user) => {
         const currentUser = await prisma.user.upsert({
           where: {
             phoneNumber: user.phoneNumber!, // Changed from id to phoneNumber
@@ -42,8 +42,8 @@ async function seedUsers() {
             },
           },
         });
-  }));
-      
+      }));
+
   } catch (error) {
     console.error(error);
     process.exit(1);
@@ -132,60 +132,59 @@ const products = [{
 }
 ];
 
-async function createProduct() {
-  try {
-    // Clear existing products
-    await prisma.product.deleteMany({});
+// async function createProduct() {
+//   try {
+//     // Clear existing products
+//     await prisma.product.deleteMany({});
 
-    for (const product of products) {
-      const category = await prisma.category.findUnique({
-        where: { name: product.categoryName },
-      });
+//     for (const product of products) {
+//       const category = await prisma.category.findUnique({
+//         where: { name: product.categoryName },
+//       });
 
-      if (category) {
-        // First create the product
-        const createdProduct = await prisma.product.create({
-          data: {
-            prodName: product.prodName,
-            prodDescription: product.prodDescription ?? "",
-            price: product.price,
-            mrp: product.mrp,
-            stock: product.stock,
-            unit: product.unit,
-            category: {
-              connect: { id: category.id },
-            },
-          }
-        });
+//       if (category) {
+//         // First create the product
+//         // const createdProduct = await prisma.product.create({
+//         //   data: {
+//         //     prodName: product.prodName,
+//         //     prodDescription: product.prodDescription ?? "",
+//         //     price: product.price,
+//         //     mrp: product.mrp,
+//         //     stock: product.stock,
+//         //     unit: product.unit,
+//         //     subcategory: "Default Subcategory", // Replace with appropriate subcategory value
+//         //   }
+//         // });
 
-        // Then create the images with the product ID
-        const imagePromises = product.images.map(imageLink => 
-          prisma.productImages.create({
-            data: {
-              productId: createdProduct.id,
-              imageLink: imageLink,
-            }
-          })
-        );
+//         // Then create the images with the product ID
+//         const imagePromises = product.images.map(imageLink =>
+//           prisma.productImages.create({
+//             data: {
+//               productId: createdProduct.id,
+//               imageLink: imageLink,
+//               position: 0, // Default position value
+//             }
+//           })
+//         );
 
-        await Promise.all(imagePromises);
-      } else {
-        console.error(`Category ${product.categoryName} not found`);
-      }
-    }
+//         await Promise.all(imagePromises);
+//       } else {
+//         console.error(`Category ${product.categoryName} not found`);
+//       }
+//     }
 
-    console.log('Products and images seeded successfully');
-  } catch (error) {
-    console.error('Error seeding products:', error);
-  }
-}
+//     console.log('Products and images seeded successfully');
+//   } catch (error) {
+//     console.error('Error seeding products:', error);
+//   }
+// }
 
 
 async function seedDatabase() {
   try {
     await seedUsers();
     await createCategory();
-    await createProduct();
+    // await createProduct();
   } catch (error) {
     console.error(error);
     process.exit(1);

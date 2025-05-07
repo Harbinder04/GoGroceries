@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { cn } from '@/app/lib/util';
+import Image from 'next/image';
 
 type SubCategory = {
 	id: number;
@@ -31,7 +32,7 @@ export function SubcategoryNavigation({
 							category.active && 'border-l-4 border-green-600 bg-green-50'
 						)}>
 						<div className='h-12 w-12 relative flex-shrink-0 overflow-hidden rounded-sm'>
-							<img
+							<Image
 								src={category.image || '/placeholder.svg'}
 								alt={category.name}
 								className='object-cover'

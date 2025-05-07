@@ -49,10 +49,11 @@ export async function POST(req: NextRequest) {
 			id: product.id,
 			status: 201,
 		});
-	} catch (e) {
+	} catch (e: unknown) {
 		return NextResponse.json(
 			{
-				error: 'An unexpected error occurred',
+				error: e,
+				message: 'Internal server error'
 			},
 			{ status: 500 }
 		);

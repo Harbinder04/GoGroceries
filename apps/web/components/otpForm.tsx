@@ -37,7 +37,8 @@ function OTPForm({ onClose }: OTPFormProps) {
 				});
 				setError(response.data.message);
 			}
-		} catch (error) {
+		} catch (e: unknown) {
+			console.log(e);
 			setError('Failed to verify OTP');
 		} finally {
 			setLoading(false);

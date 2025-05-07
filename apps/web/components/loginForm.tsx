@@ -21,8 +21,9 @@ function LoginForm({
 
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
+	//TODO: what is the use of success here
 	const [success, setSuccess] = useState(false);
-
+	console.log(success);
 	const handleSubmit = async (
 		e: React.FormEvent<HTMLFormElement>
 	): Promise<void> => {
@@ -50,7 +51,8 @@ function LoginForm({
 				});
 				setError('Failed to send OTP');
 			}
-		} catch (error) {
+		} catch (e: unknown) {
+			console.error(e);
 			setError('Failed to send OTP');
 		} finally {
 			setLoading(false);
