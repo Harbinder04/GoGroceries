@@ -57,6 +57,29 @@ const GroceryCategories = () => {
 		getCategories();
 	}, []);
 
+	if (loading) {
+		return (
+			<div className='container mx-auto px-4 py-8'>
+				<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-10 gap-4'>
+					{Array.from({ length: 17 }, (_, index) => (
+						<div
+							role='status'
+							className='flex items-center justify-center h-full w-auto bg-gray-300 rounded-lg animate-pulse dark:bg-gray-500'
+							key={index}>
+							<div className='w-[128px] h-[188px] bg-gray-200 rounded-lg'></div>
+						</div>
+					))}
+				</div>
+			</div>
+		);
+	}
+	if (error) {
+		return (
+			<div className='container mx-auto px-4 py-8'>
+				<p className='text-center mt-4 text-red-500'>{error}</p>
+			</div>
+		);
+	}
 	return (
 		<div className='container mx-auto px-4 py-8'>
 			<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-10 gap-4'>
@@ -76,9 +99,6 @@ const GroceryCategories = () => {
 						</div>
 					))}
 			</div>
-
-			{loading && <p className='text-center mt-4'>Loading subcategories...</p>}
-			{error && <p className='text-center mt-4 text-red-500'>{error}</p>}
 		</div>
 	);
 };

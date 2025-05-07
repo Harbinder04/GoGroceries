@@ -1,6 +1,8 @@
 import { Product } from '@/types/type';
 import React from 'react';
-import { useCartStore } from '@/store/categoryStrore';
+import { useCartStore } from '@/store/cartStore';
+import { useRouter } from 'next/navigation';
+import { useProductStore } from '@/store/productStore';
 
 const ItemCard = ({
 	product,
@@ -9,11 +11,25 @@ const ItemCard = ({
 	product: Product;
 	deliveryTime?: string;
 }) => {
+	const router = useRouter();
 	const { addToCart, removeFromCart, getItemQuantity } = useCartStore();
 	const quantity = getItemQuantity(product.id);
+	const { fetchProducts } = useProductStore();
+
+	function handleCardClick(e: React.MouseEvent<HTMLDivElement>) {
+		try {
+			router.push(
+				`/prn/${product.prodName.replace(/\s+/g, '-')}/pid/${product.id}`
+			);
+		} catch (e: unknown) {
+			console.log('unable to redirect');
+		}
+	}
 
 	return (
-		<div className='min-w-[200px] p-4 bg-white rounded-lg border border-gray-200 flex flex-col gap-2'>
+		<div
+			className='min-w-[200px] p-4 bg-white rounded-lg border border-gray-200 flex flex-col gap-2 cursor-pointer'
+			onClick={handleCardClick}>
 			<img
 				src={product.image[0]?.imageLink || 'https://placehold.co/600x400/png'}
 				alt={product.image[0]?.alt || product.prodName}
@@ -33,20 +49,32 @@ const ItemCard = ({
 				{quantity === 0 ? (
 					<button
 						className='px-4 py-1 text-green-600 border border-green-600 rounded hover:bg-green-50 text-sm font-medium'
-						onClick={() => addToCart(product)}>
+						onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+							e.stopPropagation();
+							addToCart(product);
+							return;
+						}}>
 						ADD
 					</button>
 				) : (
 					<div className='flex items-center bg-green-600 text-white rounded h-8'>
 						<button
 							className='px-2 h-full flex items-center justify-center font-bold text-lg'
-							onClick={() => removeFromCart(product.id)}>
+							onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+								e.stopPropagation();
+								removeFromCart(product.id);
+								return;
+							}}>
 							-
 						</button>
 						<span className='px-3'>{quantity}</span>
 						<button
 							className='px-2 h-full flex items-center justify-center font-bold text-lg'
-							onClick={() => addToCart(product)}>
+							onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+								e.stopPropagation();
+								addToCart(product);
+								return;
+							}}>
 							+
 						</button>
 					</div>

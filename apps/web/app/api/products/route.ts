@@ -1,3 +1,5 @@
+// this route is use to upload the data and metadata of the product. 
+
 import { NextRequest, NextResponse } from 'next/server';
 import { ProductSchema } from '@repo/common/types';
 import { prisma } from '@repo/db';

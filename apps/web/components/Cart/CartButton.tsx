@@ -1,8 +1,11 @@
+'use client';
 import React, { useEffect } from 'react';
 import { X } from '@repo/ui/lucide-react';
 import CartItemCard from './CartItemCard';
 // import BillDetails from './BillDetails';
-import { useCartStore } from '@/store/categoryStrore';
+import { useCartStore } from '@/store/cartStore';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 function CartButton({ onClose }: { onClose: () => void }) {
 	const {
@@ -14,6 +17,14 @@ function CartButton({ onClose }: { onClose: () => void }) {
 		clearCart,
 	} = useCartStore();
 
+	const route = useRouter();
+	const handleCheckout = () => {
+		console.log('button clicked');
+		if (items.length === 0) {
+			route.push('/checkout');
+		}
+		return;
+	};
 	if (items.length === 0) {
 		return (
 			<div className='absolute right-0 bg-white w-96 h-dvh overflow-y-scroll'>
@@ -24,8 +35,13 @@ function CartButton({ onClose }: { onClose: () => void }) {
 					<p className='absolute left-4 top-5 text-lg font-bold'>My Cart</p>
 				</div>
 
-				<div className='flex justify-center items-center bg-gray-200 m-2 h-auto rounded-sm py-2 text-5xl'>
-					<div>No Item is added</div>
+				<div className='flex justify-center items-center m-2 h-fit rounded-sm py-2 text-5xl'>
+					<Image
+						src='/zero_cart.png'
+						alt='Empty cart illustration'
+						width={480}
+						height={480}
+					/>
 				</div>
 			</div>
 		);
@@ -76,7 +92,9 @@ function CartButton({ onClose }: { onClose: () => void }) {
 						onClick={handleClearCart}>
 						Clear Cart
 					</button>
-					<button className='w-full py-2 mt-3 bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium'>
+					<button
+						className='w-full py-2 mt-3 bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium hover:cursor-pointer'
+						onClick={handleCheckout}>
 						Proceed to Checkout
 					</button>
 				</div>

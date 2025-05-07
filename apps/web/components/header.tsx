@@ -5,6 +5,7 @@ import React from 'react';
 import SearchBar from './searchbar';
 import { checkSession, logout } from '@/app/action';
 import CartButton from './Cart/CartButton';
+import Link from 'next/link';
 
 function Header() {
 	const [activeButton, setActiveButton] = React.useState('');
@@ -90,9 +91,11 @@ function Header() {
 			<div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full'>
 				<header className='bg-primary flex justify-between items-center h-16'>
 					<div className='flex items-center'>
-						<h1 className='font-bold text-3xl text-green mx-2 border-r-4 border-gray-400 pr-3'>
-							<span className='text-amber-300'>Go</span>Groceries
-						</h1>
+						<Link href='/'>
+							<h1 className='font-bold text-3xl text-green mx-2 border-r-4 border-gray-400 pr-3'>
+								<span className='text-amber-300'>Go</span>Groceries
+							</h1>
+						</Link>
 						<div className='flex flex-col text-sm'>
 							<span>Delivery in 8 min.</span>
 							<span className='line-clamp-1'>
@@ -143,7 +146,7 @@ function Header() {
 											My Orders
 										</a>
 										<a
-											href='/address'
+											href='accounts/address'
 											className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'>
 											Addresses
 										</a>
