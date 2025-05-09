@@ -236,6 +236,8 @@ const CheckoutPage = () => {
 									<Image
 										src='https://cdn.iconscout.com/icon/free/png-256/free-google-pay-2038779-1721670.png'
 										alt='Google Pay'
+										width={100}
+										height={100}
 										className='w-full h-full object-contain'
 									/>
 								</div>

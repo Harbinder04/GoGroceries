@@ -1,0 +1,180 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int       @id @default(autoincrement())
+  name        String
+  phoneNumber String    @unique // Ensures phone numbers are unique
+  address     Address[]
+  orders      Order[]
+  role        UserRole? @default(USER)
+  otp         String?
+  isVerified  Boolean   @default(false)
+  cart        Cart? // One-to-one relationship with Cart
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  DELIVERY_PARTNER
+}
+
+model Address {
+  id          Int         @id @default(autoincrement())
+  city        String
+  state       String
+  street      String
+  Landmark    String?
+  postalCode  Int
+  isDefault   Boolean     @default(false)
+  addressType AddressType @default(HOME)
+  user        User        @relation(fields: [userid], references: [id])
+  userid      Int         @unique
+  Order       Order[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+enum AddressType {
+  WORKPLACE
+  HOME
+}
+
+model Category {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  image       String?
+  subcategory SubCategory[] //one-to-munknown relationship with products 
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model SubCategory {
+  id         Int       @id @default(autoincrement())
+  name       String    @unique
+  image      String
+  products   Product[]
+  category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId Int
+}
+
+model Product {
+  id              Int             @id @default(autoincrement())
+  prodName        String
+  prodDescription String?
+  discount        Int?            @default(0)
+  price           Float
+  mrp             Float
+  //Todo:: there might be multiple images for porduct ✅
+  image           ProductImages[]
+  stock           Int             @default(0)
+  unit            String //e.g kg, g, pieces, l or ml etc.
+  subcategory     SubCategory     @relation(fields: [subcategoryId], references: [id], onDelete: Cascade)
+  subcategoryId   Int
+  CartItem        CartItem[]
+  OrderItem       OrderItem[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  //TODO :: Implement favourite table
+  // FavouriteItem FavoriteItem[]
+}
+
+// keeping all the images of products here
+model ProductImages {
+  id        Int      @id @default(autoincrement())
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int
+  //todo:: added image link should be differen currently changing for seeding purpose only. 
+  imageLink String
+  position  Int
+  alt       String?
+  isPrimary Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
+}
+
+model Cart {
+  id     Int        @id @default(autoincrement())
+  user   User       @relation(fields: [userId], references: [id], onDelete: Cascade) //added cascade to delete cart when user is deleted
+  userId Int        @unique // Ensures one user can only have one cart
+  items  CartItem[]
+
+  @@index([userId]) //for better performance
+}
+
+model CartItem {
+  id           Int      @id @default(autoincrement())
+  cart         Cart     @relation(fields: [cartId], references: [id])
+  cartId       Int
+  product      Product  @relation(fields: [productId], references: [id])
+  productId    Int
+  itemQuantity Int      @default(1)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Order {
+  id            Int           @id @default(autoincrement())
+  address       Address       @relation(fields: [addressid], references: [id])
+  addressid     Int           @unique
+  user          User          @relation(fields: [userid], references: [id])
+  userid        Int           @unique
+  status        OrderStatus   @default(PROCESSING)
+  items         OrderItem[]
+  totalAmount   Float
+  PaymentStatus PaymentStatus @default(PENDING)
+  PaymentMethod PaymentMethod
+  //todo:: add which delivery partner is delivering goods.
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+enum PaymentMethod {
+  CASH_ON_DELIVERY
+  UPI
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  CONFIRM
+}
+
+enum OrderStatus {
+  PROCESSING
+  PENDING
+  PLACED
+  PREPARING
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+}
+
+model OrderItem {
+  id        Int      @id @default(autoincrement())
+  order     Order    @relation(fields: [orderid], references: [id])
+  orderid   Int      @unique
+  product   Product  @relation(fields: [porductId], references: [id])
+  porductId Int      @unique
+  quantity  Int
+  price     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
