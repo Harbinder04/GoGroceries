@@ -56,6 +56,8 @@ const ProductDisplay = () => {
 							`https://placehold.co/600x400`
 						}
 						alt={product?.image[0]?.alt || 'product'}
+						width={100}
+						height={100}
 						className='w-full object-contain'
 					/>
 				</div>

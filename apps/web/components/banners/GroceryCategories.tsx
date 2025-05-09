@@ -103,6 +103,8 @@ const GroceryCategories = () => {
 							<div className='bg-gray-100 rounded-lg w-[128px] h-[188px]'>
 								<Image
 									src={category.image}
+									width={100}
+									height={100}
 									alt={category.name}
 									className='w-fit h-fit object-contain mx-auto'
 								/>

@@ -191,6 +191,8 @@ const Footer = () => {
 							src='https://placehold.co/50x50'
 							alt='Apple App Store'
 							className='mr-2'
+							width={100}
+							height={100}
 						/>
 						Download on the App Store
 					</a>
@@ -201,6 +203,8 @@ const Footer = () => {
 							src='https://placehold.co/50x50'
 							alt='Google Play Store'
 							className='mr-2'
+							width={100}
+							height={100}
 						/>
 						Get it on Google Play
 					</a>
