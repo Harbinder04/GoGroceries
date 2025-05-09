@@ -5,7 +5,8 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format:check": "prettier --write \"**/*.{ts, tsx, json, md}\""
+    "format:check": "prettier --write \"**/*.{ts, tsx, json, md}\"",
+    "db:generate": "cd packages/database && yarn db:generate & cd ../.."
   },
   "devDependencies": {
     "prettier": "^3.2.5",
