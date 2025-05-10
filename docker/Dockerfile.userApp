@@ -1,0 +1,17 @@
+FROM node:24.0.1-alpine3.20
+
+WORKDIR /usr/src/app
+
+COPY package.json yarn.lock turbo.json tsconfig.json ./
+
+COPY apps ./apps
+COPY packages ./packages
+
+#Install dependencies
+RUN yarn install
+
+RUN yarn db:generate
+
+RUN yarn build
+
+CMD ["yarn", "run", "start-user-app"]
