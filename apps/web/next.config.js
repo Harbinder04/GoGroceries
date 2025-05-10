@@ -5,6 +5,7 @@ const nextConfig = {
 			new URL('https://placehold.co/**'),
 			new URL('https://cdn.grofers.com/**'),
 		],
+		dangerouslyAllowSVG: true,
 	},
 };
 
