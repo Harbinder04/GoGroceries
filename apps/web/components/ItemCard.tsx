@@ -36,6 +36,8 @@ const ItemCard = ({
 			<Image
 				src={product.image[0]?.imageLink || 'https://placehold.co/600x400/png'}
 				alt={product.image[0]?.alt || product.prodName}
+				width={100}
+				height={100}
 				className='w-full h-40 object-contain mb-2'
 			/>
 			<div className='text-sm text-gray-500'>{deliveryTime}</div>

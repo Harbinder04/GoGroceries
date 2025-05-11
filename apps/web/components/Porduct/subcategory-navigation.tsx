@@ -35,6 +35,8 @@ export function SubcategoryNavigation({
 							<Image
 								src={category.image || '/placeholder.svg'}
 								alt={category.name}
+								width={100}
+								height={100}
 								className='object-cover'
 							/>
 						</div>

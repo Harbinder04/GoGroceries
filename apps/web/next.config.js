@@ -2,8 +2,16 @@
 const nextConfig = {
 	images: {
 		remotePatterns: [
-			new URL('https://placehold.co/**'),
-			new URL('https://cdn.grofers.com/**'),
+			{
+				protocol: 'https',
+				hostname: 'placehold.co',
+				pathname: '/**',
+			},
+			{
+				protocol: 'https',
+				hostname: 'cdn.grofers.com',
+				pathname: '/**',
+			},
 		],
 		dangerouslyAllowSVG: true,
 	},
