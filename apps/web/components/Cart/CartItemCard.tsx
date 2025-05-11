@@ -38,6 +38,8 @@ function CartItemCard({
 						products.image[0]?.imageLink || 'https://placehold.co/600x400/png'
 					}
 					alt={products.prodName}
+					width={100}
+					height={100}
 					className='object-contain w-18 h-12'
 				/>
 			</div>

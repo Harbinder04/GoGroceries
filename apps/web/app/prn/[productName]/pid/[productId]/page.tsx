@@ -72,6 +72,8 @@ const ProductDisplay = () => {
 								<Image
 									src={img.imageLink}
 									alt={`Thumbnail ${img.alt}`}
+									height={100}
+									width={100}
 									className='w-full h-full object-contain'
 								/>
 							</div>
@@ -176,6 +178,8 @@ const ProductDisplay = () => {
 							<Image
 								src='https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=90/assets/web/blinkit-promises/10_minute_delivery.png'
 								alt='Fast delivery'
+								width={100}
+								height={100}
 								className='w-full h-full object-contain'
 							/>
 						</div>
@@ -194,6 +198,8 @@ const ProductDisplay = () => {
 							<Image
 								src='https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=90/assets/web/blinkit-promises/Best_Prices_Offers.png'
 								alt='Best prices'
+								height={100}
+								width={100}
 								className='w-full h-full object-contain'
 							/>
 						</div>
@@ -212,6 +218,8 @@ const ProductDisplay = () => {
 							<Image
 								src='https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=90/assets/web/blinkit-promises/Wide_Assortment.png'
 								alt='Wide assortment'
+								width={100}
+								height={100}
 								className='w-full h-full object-contain'
 							/>
 						</div>
