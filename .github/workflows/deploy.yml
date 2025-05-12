@@ -39,4 +39,4 @@ jobs:
             sudo docker pull harbinder/harbinder-gogroceries:latest
             sudo docker stop harbinder-gogroceries || true
             sudo docker rm harbinder-gogroceries || true
-            sudo docker run -d --name harinder-gogroceries -p 3000:3000 harbinder04/harinder-gogroceries:latest
+            sudo docker run -d --name harbinder-gogroceries -p 3000:3000 harbinder04/harbinder-gogroceries:latest
