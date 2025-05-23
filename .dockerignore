@@ -1,0 +1,17 @@
+#Git
+.git
+.gitignore
+
+#NOde modules (Should be installed within Docker build stages)
+node_modules
+apps/node_modules
+packages/database/node_modules
+packages/database/typescript-config/node_modules
+packages/database/ui/node_modules
+
+# Build
+
+dist 
+
+# IDE config 
+.vscode
