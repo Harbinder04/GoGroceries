@@ -1,18 +1,8 @@
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
-		remotePatterns: [
-			{
-				protocol: 'https',
-				hostname: 'placehold.co',
-				pathname: '/**',
-			},
-			{
-				protocol: 'https',
-				hostname: 'cdn.grofers.com',
-				pathname: '/**',
-			},
-		],
+		remotePatterns: [new URL('https://placehold.co/**'), new URL('https://cdn.grofers.com/**')],
 		dangerouslyAllowSVG: true,
 	},
 };
